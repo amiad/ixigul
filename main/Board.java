@@ -1,8 +1,4 @@
-/**
- * 
- */
-
-
+package main;
 /**
  * @author boaz
  *
