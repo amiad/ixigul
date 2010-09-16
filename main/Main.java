@@ -2,13 +2,14 @@ package main;
 import java.io.*;
 
 /**
- * @author boaz
+ * @author boaz, September 2010
+ * @version 1.0
  *
  */
 public class Main {
 
 	/**
-	 * @param args
+	 * @param args - arguments from command line. in our application (right now) have not any care about command line parameters
 	 */
 	public static void main ( String[] args )
 	{
@@ -42,14 +43,26 @@ public class Main {
 		}
 	}
 	
-	/*
-	 * This function read from standard input and check if this is one char and if is number
-	 * more information in: http://www.java2s.com/Code/Java/Development-Class/ReadanintfromStandardInput.htm
+	/**
+	 * This function read from standard input and check if this is one char and if is number<br>
+	 * more information in: <a href=http://www.java2s.com/Code/Java/Development-Class/ReadanintfromStandardInput.htm>http://www.java2s.com/Code/Java/Development-Class/ReadanintfromStandardInput.htm</a>
+	 * @param lowLimit - Lower limit of the integer we want to read
+	 * @param highLimit - Higher limit of the integer we want to read
+	 * @return integer between lowLimit and highLimit
 	 */
 	public static int readInt(int lowLimit, int highLimit)
 	{
+		/**
+		 * Buffer for input string
+		 */
 		String line = null;
+		/**
+		 * The value to return
+		 */
 	    int val = 0;
+	    /**
+	     * Flag to check if need re-read from input
+	     */
 	    boolean flag = false;
 	    
 	    // Loop until right number was received
