@@ -1,7 +1,5 @@
-/**
- * 
- */
-
+package main;
+import java.io.*;
 
 /**
  * @author boaz
@@ -12,42 +10,28 @@ public class Main {
 	/**
 	 * @param args
 	 */
-	public static void main ( String[] args ){
-		// TODO Auto-generated method stub
+	public static void main ( String[] args )
+	{
+		/* b is board that we gaming on. create new object and print the clean board */
 		Board b = new Board();
 		b.PrintBoard();
 		int choose;
 		
-		for (int i=0;i<9;i++)
+		
+		
+		for (int i=0;i<9;i++) // i is turn number, and in tic-tac-toe have exactly 9 turns
 		{
-			choose = 0;
-			// TODO - print "X turn" or "O turn" by i%2
-			System.out.print("Please choose number between 1-9: ");
-			while (choose == 0 || choose == 10 /* choose = 10 since have 'enter' in buffer after each step - TODO clean code (how?) */)
-			{
-				try
-				{
-					choose = System.in.read();
-				}
-				catch (Exception e)
-				{
-					System.err.println("Error in reading.");
-				}
-			}
-			choose = choose - '0';
+			choose = 0; // choose is the locate that choosed by player
+			if (i % 2 == 0)
+				System.out.print("X, is your turn, ");
+			else
+				System.out.print("O, is your turn, ");
+			
+			choose = readInt(1,9);
 			while (b.getLocateValue(choose - 1) == 'X' || b.getLocateValue(choose - 1) == 'O')
 			{
 				System.out.print("Choose another number: ");
-				try
-				{
-					System.in.read(); // buffer have 'enter' - TODO clean code
-					choose = System.in.read();
-				}
-				catch (Exception e)
-				{
-					System.err.println("Error in reading.");
-				}
-				choose = choose - '0';
+				choose = readInt(1,9);
 			}
 			if (i % 2 == 0)
 			{
@@ -62,5 +46,40 @@ public class Main {
 		}
 	}
 	
-
+	/*
+	 * This function read from standard input and check if this is one char and if is number
+	 * more information in: http://www.java2s.com/Code/Java/Development-Class/ReadanintfromStandardInput.htm
+	 */
+	public static int readInt(int lowLimit, int highLimit)
+	{
+		String line = null;
+	    int val = 0;
+	    boolean flag = false;
+	    
+	    // Loop until right number was received
+	    do {
+	    	System.out.print("Please choose number between " + lowLimit + " and " + highLimit + ": ");
+		    try {
+		    	BufferedReader is = new BufferedReader(new InputStreamReader(System.in));
+		    	line = is.readLine();
+		    	val = Integer.parseInt(line);
+			    flag = true;
+		    }
+		    catch (NumberFormatException ex) {
+		    	System.err.println("Not a valid number: " + line);
+		    }
+		    catch (IOException e) {
+		    	System.err.println("Unexpected IO ERROR: " + e);
+		    }
+		    
+		    // Check if val is in limits
+		    if (val < lowLimit || val > highLimit) {
+		    	System.out.println("The number is out of limit.");
+		    	flag = false;
+		    }
+	    } while (flag == false);
+	    
+	    return val;
+	    
+	}
 }
