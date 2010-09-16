@@ -18,9 +18,7 @@ public class Main {
 		int choose;
 		
 		
-		
-		for (int i=0;i<9;i++) // i is turn number, and in tic-tac-toe have exactly 9 turns
-		{
+		for (int i=0;i<9;i++) { // i is turn number, and in tic-tac-toe have exactly 9 turns
 			choose = 0; // choose is the locate that choosed by player
 			if (i % 2 == 0)
 				System.out.print("X, is your turn, ");
@@ -28,21 +26,19 @@ public class Main {
 				System.out.print("O, is your turn, ");
 			
 			choose = readInt(1,9);
-			while (b.getLocateValue(choose - 1) == 'X' || b.getLocateValue(choose - 1) == 'O')
-			{
+			while (b.getLocateValue(choose - 1) == 'X' || b.getLocateValue(choose - 1) == 'O') {
 				System.out.print("Choose another number: ");
 				choose = readInt(1,9);
 			}
 			if (i % 2 == 0)
-			{
 				b.setLocateValue(choose - 1, 'X');
-			}
 			else
-			{
 				b.setLocateValue(choose - 1, 'O');
-			}
 			b.PrintBoard();
-			b.isWin();
+			if (b.isWin() == true) {
+				System.out.println("Player " + (i%2==0?'X':'O') + " win!");
+				i=9;
+			}	
 		}
 	}
 	
