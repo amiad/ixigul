@@ -72,8 +72,8 @@ public class Board {
 				(locate[0] == locate[3] && locate[3] == locate[6]) || //0-3-6 (left column)
 				(locate[1] == locate[4] && locate[4] == locate[7]) || //1-4-7 (center column)
 				(locate[2] == locate[5] && locate[5] == locate[8]) || //2-5-8 (right column)
-				(locate[0] == locate[1] && locate[1] == locate[2]) || //0-4-8 (left-up diagonal)
-				(locate[0] == locate[1] && locate[1] == locate[2]) ) //2-4-6 (left-down diagonal)
+				(locate[0] == locate[4] && locate[4] == locate[8]) || //0-4-8 (left-up diagonal)
+				(locate[2] == locate[4] && locate[4] == locate[6]) ) //2-4-6 (left-down diagonal)
 			return true;
 		else
 			return false;
