@@ -1,7 +1,7 @@
 /**
  * 
  */
-package main;
+
 
 /**
  * @author boaz
@@ -53,6 +53,11 @@ public class Board {
 		//TODO - function that check if have a winner
 		// Maybe the return type need change? Actual values?
 		;
+	}
+
+	public int[] getEmpty() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
