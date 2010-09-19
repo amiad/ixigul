@@ -1,3 +1,4 @@
+package main;
 
 public class CompPlayer extends Player{
 	@SuppressWarnings("unused")
@@ -17,9 +18,10 @@ public class CompPlayer extends Player{
 		else step=rndStep(board);
 		return step;
 	}
+	
+	//return random step from the possible steps
 	private int rndStep(Board board) {
-		// TODO Auto-generated method stub
-		return 0;
+		return board.getEmpty((int)(Math.random()*board.getEmpty().length));
 	}
 
 	//return the best step
@@ -28,7 +30,7 @@ public class CompPlayer extends Player{
 	}
 
 	public int[] correct(Board board, int lastStep) {
-		int[] answer=new int[2];
+		int[] answer={lastStep,0};
 		if (/*I win*/) {answer={lastStep,2}; return answer;}
 		else if (/*teko*/) {answer={lastStep,1}; return answer;}
 		else if (/*I lost*/) {answer={lastStep,0}; return answer;}
@@ -40,8 +42,14 @@ public class CompPlayer extends Player{
 				board2.getLocateValue(nextStep);
 				int myStep=lastStep;
 				if (lastStep==0) myStep=nextStep;
-				other.correct(board2,myStep);
+				answer=betterStep(other.correct(board2,myStep),answer);
 			}
 		}
+		return answer;
+	}
+	
+	private int[] betterStep(int[] step1, int[] step2){
+		if (step1[1]<step2[1]) return step2;
+		else return step1;
 	}
 }
