@@ -1,7 +1,7 @@
 package main;
 
 public abstract class Player {
-	private boolean mark;//mark as boolean. true is X false is O 
+	protected boolean mark;//mark as boolean. true is X false is O 
 
 	//get mark of player as boolean. true is X false is O
 	public Player(boolean  m){

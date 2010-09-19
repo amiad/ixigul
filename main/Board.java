@@ -1,4 +1,7 @@
 package main;
+
+import java.util.Vector;
+
 /**
  * @author boaz, September 2010
  * @version 1.0
@@ -10,23 +13,25 @@ public class Board {
 	 */
 	private char[] locate;
 	
+	// list of empty cells
+	private Vector<Integer> empty=new Vector<Integer>();
 	/**
 	 * Constructor for class Board - only initialize locate array
 	 */
 	public Board()
 	{
 		locate = new char[9];
-		locate[0]='1';
-		locate[1]='2';
-		locate[2]='3';
-		locate[3]='4';
-		locate[4]='5';
-		locate[5]='6';
-		locate[6]='7';
-		locate[7]='8';
-		locate[8]='9';
+		for (int i=1;i<=9;i++){
+			locate[i-1]=Character.forDigit(i, 10);
+			empty.add(new Integer(i));						
+		}
 	}
 	
+	public Board(Board other) {
+		locate=other.getLocate();
+		empty=other.getVectorEmpty();
+	}
+
 	/**
 	 * This function just print the board to standard output.
 	 * 
@@ -58,6 +63,7 @@ public class Board {
 	public void setLocateValue(int i, char value)
 	{
 		locate[i] = value;
+		empty.remove(new Integer(i));
 	}
 	
 	/**
@@ -85,8 +91,37 @@ public class Board {
 	 * @return
 	 */
 	public int[] getEmpty() {
-		// TODO Auto-generated method stub
-		return null;
+		Integer[] arr=new Integer[empty.size()];
+		empty.toArray(arr);
+		int[] arrInt=new int[arr.length];
+		for (int i=0;i<arr.length;i++)
+			arrInt[i]=arr[i].intValue();
+		return arrInt;
 	}
-
+	public Vector<Integer> getVectorEmpty(){
+		return empty;
+	}
+	public char[] getLocate(){
+		return locate;
+	}
+	
+	//return -1 if the game not finished. 0 if O win. 
+	// 1 if nobody win and 2 if X win.
+	public int getStatus(){
+		for (int i=0;i<3;i++){
+			if ((locate[i*3]==locate[i*3+1])&&(locate[i*3+1]==locate[i*3+2]))
+				return mark2int(locate[i]);
+			else if ((locate[i]==locate[i+3])&&(locate[i+3]==locate[i+6]))
+				return mark2int(locate[i]);
+		}
+		if ((locate[0] == locate[4] && locate[4] == locate[8]) || //0-4-8 (left-up diagonal)
+		(locate[2] == locate[4] && locate[4] == locate[6])) //2-4-6 (left-down diagonal)
+			return mark2int(locate[4]);
+		if (getEmpty().length==0) return 1;
+		else return -1;
+	}
+	private int mark2int(char c){
+		if (c=='O') return 0;
+		else return 2;
+	}
 }
