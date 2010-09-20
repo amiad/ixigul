@@ -1,6 +1,6 @@
+package main;
 
 public class CompPlayer extends Player{
-	@SuppressWarnings("unused")
 	private int level;//the level of computer player. probability to do best step (level/4)
 	
 	//get mark of player and the level of computer
@@ -17,9 +17,10 @@ public class CompPlayer extends Player{
 		else step=rndStep(board);
 		return step;
 	}
+	
+	//return random step from the possible steps
 	private int rndStep(Board board) {
-		// TODO Auto-generated method stub
-		return 0;
+		return board.getEmpty()[(int)(Math.random()*board.getEmpty().length)];
 	}
 
 	//return the best step
@@ -28,20 +29,35 @@ public class CompPlayer extends Player{
 	}
 
 	public int[] correct(Board board, int lastStep) {
-		int[] answer=new int[2];
-		if (/*I win*/) {answer={lastStep,2}; return answer;}
-		else if (/*teko*/) {answer={lastStep,1}; return answer;}
-		else if (/*I lost*/) {answer={lastStep,0}; return answer;}
-		else{
-			CompPlayer other=new CompPlayer(!markB, 4)
+		int[] answer={lastStep,0};
+		if (((board.getStatus()==0)&(!mark))||((board.getStatus()==2)&(mark))){// I win
+			answer[0]=lastStep;
+			answer[1]=2; 
+		}
+		else if (board.getStatus()==1) { //teko
+			answer[0]=lastStep;
+			answer[1]=1; 
+		}
+		else if (((board.getStatus()==0)&(mark))||((board.getStatus()==2)&(!mark))){// I lose
+			answer[0]=lastStep;
+			answer[1]=0;
+		}
+		else{ //the game not finished
+			CompPlayer other=new CompPlayer(!mark, 4);
 			for (int i=0;i<board.getEmpty().length;i++){
 				Board board2=new Board(board);
-				int nextStep=board.getEmpty(i);
+				int nextStep=board.getEmpty()[i];
 				board2.getLocateValue(nextStep);
 				int myStep=lastStep;
 				if (lastStep==0) myStep=nextStep;
-				other.correct(board2,myStep);
+				answer=betterStep(other.correct(board2,myStep),answer);
 			}
 		}
+		return answer;
+	}
+	
+	private int[] betterStep(int[] step1, int[] step2){
+		if (step1[1]<step2[1]) return step2;
+		else return step1;
 	}
 }
