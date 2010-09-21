@@ -6,7 +6,7 @@ import java.util.Vector;
  * @author boaz, September 2010
  * @version 1.0
  */
-public class Board {
+public class Board implements Cloneable {
 
 	/**
 	 * Board game - private array of chars
@@ -27,11 +27,6 @@ public class Board {
 		}
 	}
 	
-	public Board(Board other) {
-		locate=other.getLocate();
-		empty=other.getVectorEmpty();
-	}
-
 	/**
 	 * This function just print the board to standard output.
 	 * 
@@ -43,6 +38,7 @@ public class Board {
 		System.out.println(locate[3] + "|" + locate[4] + "|" + locate[5]);
 		System.out.println("-----");
 		System.out.println(locate[6] + "|" + locate[7] + "|" + locate[8]);
+		System.out.println();
 	}
 	
 	/**

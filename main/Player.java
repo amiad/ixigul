@@ -18,7 +18,7 @@ public abstract class Player {
 		else return 'O';
 	}
 		
-	//get the board and return the next step of this player
+	//get the board and do the next step of this player
 	public abstract void step(Board board);
 	
 }
