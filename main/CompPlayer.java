@@ -57,9 +57,10 @@ public class CompPlayer extends Player{
 	}
 	
 	private int[] betterStep(int[] step1, int[] step2,boolean firstMark){
-		if (((step1[1]<step2[1])&&(firstMark==mark))||
-				((step1[1]>step2[1])&&(firstMark!=mark)))				
-			return step2;
+		if (firstMark!=mark){
+			step1[1]=step1[1]*-1;
+			step2[1]=step2[1]*-1;
+		if (((step1[1]<step2[1]) return step2;
 		else return step1;
 	}
 }
