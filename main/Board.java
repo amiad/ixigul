@@ -23,7 +23,7 @@ public class Board {
 		locate = new char[9];
 		for (int i=1;i<=9;i++){
 			locate[i-1]=Character.forDigit(i, 10);
-			empty.add(new Integer(i));						
+			empty.add(new Integer(i-1));						
 		}
 	}
 	
@@ -98,12 +98,6 @@ public class Board {
 			arrInt[i]=arr[i].intValue();
 		return arrInt;
 	}
-	public Vector<Integer> getVectorEmpty(){
-		return empty;
-	}
-	public char[] getLocate(){
-		return locate;
-	}
 	
 	//return -1 if the game not finished. 0 if O win. 
 	// 1 if nobody win and 2 if X win.
@@ -123,5 +117,12 @@ public class Board {
 	private int mark2int(char c){
 		if (c=='O') return 0;
 		else return 2;
+	}
+	
+	public Board clone(){
+		Board board2=new Board();
+		for (int i=0;i<locate.length;i++)
+			if ((locate[i]=='X')||(locate[i]=='O')) board2.setLocateValue(i, locate[i]);
+		return board2;
 	}
 }
