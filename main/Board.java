@@ -83,38 +83,45 @@ public class Board implements Cloneable {
 	}
 	
 	/**
-	 * 
-	 * @return
+	 * @return array of ints with indexes of empty cell in board
 	 */
 	public int[] getEmpty() {
 		Integer[] arr=new Integer[empty.size()];
-		empty.toArray(arr);
+		empty.toArray(arr); //convert vector empty to array
 		int[] arrInt=new int[arr.length];
-		for (int i=0;i<arr.length;i++)
-			arrInt[i]=arr[i].intValue();
+		for (int i=0;i<arr.length;i++) 
+			arrInt[i]=arr[i].intValue(); //convert Integer array to int array
 		return arrInt;
 	}
-	
-	//return -1 if the game not finished. 0 if O win. 
-	// 1 if nobody win and 2 if X win.
+	/**
+	 * check if the game finished.
+	 * @return 1 if the game not finished. 0 if O wined. 1 if nobody wined and 2 if X wined.
+	 */
 	public int getStatus(){
 		for (int i=0;i<3;i++){
-			if ((locate[i*3]==locate[i*3+1])&&(locate[i*3+1]==locate[i*3+2]))
-				return mark2int(locate[i]);
-			else if ((locate[i]==locate[i+3])&&(locate[i+3]==locate[i+6]))
+			if ((locate[i*3]==locate[i*3+1])&&(locate[i*3+1]==locate[i*3+2])) //horizontal sequence
+				return mark2int(locate[i]);//code by the winner
+			else if ((locate[i]==locate[i+3])&&(locate[i+3]==locate[i+6])) //vertical sequence
 				return mark2int(locate[i]);
 		}
 		if ((locate[0] == locate[4] && locate[4] == locate[8]) || //0-4-8 (left-up diagonal)
 		(locate[2] == locate[4] && locate[4] == locate[6])) //2-4-6 (left-down diagonal)
 			return mark2int(locate[4]);
-		if (getEmpty().length==0) return 1;
-		else return -1;
+		if (getEmpty().length==0) return 1;//nobody is wined
+		else return -1;//the game not finished
 	}
+	/**
+	 * 
+	 * @param c the mark has wined
+	 * @return code by the winner. O=0 X=2
+	 */
 	private int mark2int(char c){
 		if (c=='O') return 0;
 		else return 2;
 	}
-	
+	/**
+	 * @return clone of this Board class
+	 */
 	public Board clone(){
 		Board board2=new Board();
 		for (int i=0;i<locate.length;i++)

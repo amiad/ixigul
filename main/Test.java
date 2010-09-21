@@ -11,16 +11,16 @@ public class Test {
 		CompPlayer p2=new CompPlayer(false, 4);
 		p1.step(b);
 		b.PrintBoard();
-		/*p2.step(b);
-		b.PrintBoard();
-		p1.step(b);
-		b.PrintBoard();
 		p2.step(b);
 		b.PrintBoard();
 		p1.step(b);
 		b.PrintBoard();
 		p2.step(b);
-		b.PrintBoard();*/
+		b.PrintBoard();
+		p1.step(b);
+		b.PrintBoard();
+		p2.step(b);
+		b.PrintBoard();
 	}
 
 }

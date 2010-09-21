@@ -1,7 +1,10 @@
 package main;
 
 public class CompPlayer extends Player{
-	private int level;//the level of computer player. probability to do best step (level/4)
+	/**
+	 * the level of computer player. probability to do best step (level*25%)
+	 */
+	private int level;
 	
 	//get mark of player and the level of computer
 	public CompPlayer(boolean m, int l) {
