@@ -60,7 +60,8 @@ public class CompPlayer extends Player{
 		if (firstMark!=mark){
 			step1[1]=step1[1]*-1;
 			step2[1]=step2[1]*-1;
-		if (((step1[1]<step2[1]) return step2;
+		}
+		if (step1[1]<step2[1]) return step2;
 		else return step1;
 	}
 }
