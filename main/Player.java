@@ -19,6 +19,6 @@ public abstract class Player {
 	}
 		
 	//get the board and return the next step of this player
-	public abstract int step(Board board);
+	public abstract void step(Board board);
 	
 }

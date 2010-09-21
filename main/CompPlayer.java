@@ -10,12 +10,12 @@ public class CompPlayer extends Player{
 	}
 	
 	//get the board and return the next step of this player. the step is best step or random step by level
-	public int step(Board board){
+	public void step(Board board){
 		int step = 0;
 		int correct=(int) Math.random()*(4-level);
 		if (correct==0) step=correct(board);
 		else step=rndStep(board);
-		return step;
+		board.setLocateValue(step, getGMark());
 	}
 	
 	//return random step from the possible steps
@@ -29,7 +29,7 @@ public class CompPlayer extends Player{
 	}
 
 	public int[] correct(Board board, int lastStep) {
-		int[] answer={lastStep,0};
+		int[] answer={lastStep,-1};
 		if (((board.getStatus()==0)&(!mark))||((board.getStatus()==2)&(mark))){// I win
 			answer[0]=lastStep;
 			answer[1]=2; 
@@ -47,7 +47,7 @@ public class CompPlayer extends Player{
 			for (int i=0;i<board.getEmpty().length;i++){
 				Board board2=new Board(board);
 				int nextStep=board.getEmpty()[i];
-				board2.getLocateValue(nextStep);
+				board2.setLocateValue(nextStep,getGMark());
 				int myStep=lastStep;
 				if (lastStep==0) myStep=nextStep;
 				answer=betterStep(other.correct(board2,myStep),answer);
