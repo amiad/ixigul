@@ -28,14 +28,18 @@ public class CompPlayer extends Player{
 
 	//return the best step
 	private int correct(Board board) {
-		return correct(board,0,mark)[0];
+		int[]ans=correct(board,0,mark);
+		System.out.println("answer="+ans[1]+"\n");
+		return ans[0];
+		//return correct(board,0,mark)[0];
 	}
 
 	public int[] correct(Board board, int lastStep,boolean firstMark) {
 		int[] answer={lastStep,-1};
 		if (((board.getStatus()==0)&(!mark))||((board.getStatus()==2)&(mark))){// I win
 			answer[0]=lastStep;
-			answer[1]=2; 
+			answer[1]=2;
+			System.out.println("111111111");
 		}
 		else if (board.getStatus()==1) { //teko
 			answer[0]=lastStep;
@@ -60,7 +64,7 @@ public class CompPlayer extends Player{
 	}
 	
 	private int[] betterStep(int[] step1, int[] step2,boolean firstMark){
-		if (firstMark!=mark){
+		if ((firstMark!=mark)&&(step2[1]!=-1)){
 			step1[1]=step1[1]*-1;
 			step2[1]=step2[1]*-1;
 		}
