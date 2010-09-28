@@ -107,8 +107,8 @@ public class Board implements Cloneable {
 		if ((locate[0] == locate[4] && locate[4] == locate[8]) || //0-4-8 (left-up diagonal)
 		(locate[2] == locate[4] && locate[4] == locate[6])) //2-4-6 (left-down diagonal)
 			return mark2int(locate[4]);
-		if (getEmpty().length==0) return 1;//nobody is wined
-		else return -1;//the game not finished
+		if (getEmpty().length==0) return 1;//nobody win
+		else return -1;// the game is not finished
 	}
 	/**
 	 * 

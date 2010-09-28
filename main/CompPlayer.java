@@ -39,7 +39,7 @@ public class CompPlayer extends Player{
 		if (((board.getStatus()==0)&(!mark))||((board.getStatus()==2)&(mark))){// I win
 			answer[0]=lastStep;
 			answer[1]=2;
-			System.out.println("111111111");
+			//System.out.println("111111111");
 		}
 		else if (board.getStatus()==1) { //teko
 			answer[0]=lastStep;

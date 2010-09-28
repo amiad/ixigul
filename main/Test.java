@@ -21,6 +21,12 @@ public class Test {
 		b.PrintBoard();
 		p2.step(b);
 		b.PrintBoard();
+		p1.step(b);
+		b.PrintBoard();
+		p2.step(b);
+		b.PrintBoard();
+		p1.step(b);
+		b.PrintBoard();
 	}
 
 }
