@@ -93,32 +93,41 @@ public class Board implements Cloneable {
 			arrInt[i]=arr[i].intValue(); //convert Integer array to int array
 		return arrInt;
 	}
+	
 	/**
-	 * check if the game finished.
-	 * @return 1 if the game not finished. 0 if O wined. 1 if nobody wined and 2 if X wined.
+	 * check the status of the game.
+	 * @return 0 in case the game still going, 1 for draw (teko), 2 for X win, and 3 for O win
 	 */
 	public int getStatus(){
-		for (int i=0;i<3;i++){
-			if ((locate[i*3]==locate[i*3+1])&&(locate[i*3+1]==locate[i*3+2])) //horizontal sequence
-				return mark2int(locate[i]);//code by the winner
-			else if ((locate[i]==locate[i+3])&&(locate[i+3]==locate[i+6])) //vertical sequence
-				return mark2int(locate[i]);
-		}
-		if ((locate[0] == locate[4] && locate[4] == locate[8]) || //0-4-8 (left-up diagonal)
-		(locate[2] == locate[4] && locate[4] == locate[6])) //2-4-6 (left-down diagonal)
-			return mark2int(locate[4]);
-		if (getEmpty().length==0) return 1;//nobody win
-		else return -1;// the game is not finished
+		for (int i=0;i<3;i++) {
+			if ((locate[i*3]==locate[i*3+1]) && (locate[i*3+1]==locate[i*3+2])) // Horizontal sequence
+				return returnCode(locate[i*3]);
+			else if ((locate[i]==locate[i+3]) && (locate[i+3]==locate[i+6])) // Vertical sequence
+				return returnCode(locate[i]);
+		} // for
+		
+		if ((locate[0] == locate[4] && locate[4] == locate[8]) || // 0-4-8 (left-up diagonal)
+				(locate[2] == locate[4] && locate[4] == locate[6])) // 2-4-6 (left-down diagonal)
+			return returnCode(locate[4]);
+		
+		if (getEmpty().length==0)
+			return 1; // Draw case
+		else
+			return 0; // The game is not finished yet
 	}
+	
 	/**
 	 * 
 	 * @param c the mark has wined
-	 * @return code by the winner. O=0 X=2
+	 * @return Code of the winner. X=2, O=3
 	 */
-	private int mark2int(char c){
-		if (c=='O') return 0;
-		else return 2;
+	private int returnCode(char c) {
+		if (c=='X')
+			return 2;
+		else
+			return 3;
 	}
+	
 	/**
 	 * @return clone of this Board class
 	 */
